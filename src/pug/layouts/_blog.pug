@@ -1,0 +1,12 @@
+block variables
+doctype html
+html(lang="zh-TW")
+  head
+    include ../partials/_head.pug
+  body
+    include ../partials/blog/_header.pug
+
+    main.container(role="main")
+      block content
+
+    include ../partials/blog/_footer.pug

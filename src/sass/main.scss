@@ -1,0 +1,16 @@
+@import 'modules/variables';
+@import 'modules/mixins';
+@import 'modules/common';
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  @include phone {
+    font-size: 3.5rem;
+  }
+}

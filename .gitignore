@@ -1,0 +1,8 @@
+# node packages
+node_modules
+
+# build out folder
+dist
+
+# vscode setting
+.vscode
