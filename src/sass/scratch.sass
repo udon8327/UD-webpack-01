@@ -1,0 +1,143 @@
+@import '_color.sass'
+
+//中獎結果
+.result-prize,.result-noprize
+  width: 100%
+  z-index: 190
+  position: absolute
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  h6
+    font-size: 36px
+    color: #fff
+    line-height: 28px
+    letter-spacing: 3px
+    margin-bottom: 10px
+    @media (max-width: 340px)
+      font-size: 32px
+  .prize-name
+    padding: 0 5%
+    p
+      font-size: 26px
+      letter-spacing: 1px
+      color: #f4ce15
+      margin-bottom: 15px
+      @media (max-width: 340px)
+        font-size: 22px
+  .prize-wrapper
+    text-align: center
+    position: relative
+    .prize-img
+      max-width: 60%
+      margin-bottom: 40px
+      z-index: 10
+      position: relative
+    img.light-circle
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%,-50%)
+      animation: lightCircle 20s linear infinite
+      @keyframes lightCircle
+        0%
+          transform: translate(-50%,-50%) rotate(0deg)
+        100%
+          transform: translate(-50%,-50%) rotate(360deg)
+  .prize-button
+    padding: 20px 5% 30px 5%
+    text-align: center
+    width: 100%
+    p
+      margin-bottom: 10px
+      font-size: 14px
+      color: #999
+    a
+      z-index: 20
+      position: relative
+      width: 75%
+      cursor: pointer
+      margin-bottom: 20px
+      display: inline-block
+      color: #fff
+      background-color: $line
+      border-radius: 50px
+      padding: 14px 18px
+      line-height: 16px
+      letter-spacing: 1px
+      text-decoration: none
+      text-align: center
+      font-size: 18px
+      transition: all 0.2s ease
+      white-space: nowrap
+      @media (max-width: 375px)
+        width: 75%
+      @media (max-width: 340px)
+        font-size: 16px
+        width: 80%
+      &:hover
+        opacity: 0.9
+      &.btn-coupon
+        background-color: #7e1238
+      @media (max-width: 340px)
+        min-width: 50%
+    img.share
+      width: 75%
+.result-noprize
+  .prize-wrapper
+    .prize-img
+      max-width: 65%
+
+//黑遮罩
+.mask-black
+  z-index: 70
+  width: 100%
+  height: 100%
+  position: absolute
+  background-color: rgba(#000, 0.8)
+
+
+
+.title-area
+
+.start-area
+  img
+    cursor: pointer
+
+.scratch-area
+  z-index: 3
+  position: relative
+  .start
+    z-index: 10
+    position: absolute
+    cursor: pointer
+  //刮刮樂套件
+  .sc__wrapper
+    cursor: pointer
+    display: block
+    margin: 0 auto
+    .sc__container
+      position: relative
+      overflow: hidden
+    .sc__container > img
+      position: relative
+      top: 0
+      left: 0
+      width: 100%
+      height: auto
+    .sc__container canvas
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: auto
+
+.description-area
+
+//通用class
+.hide
+  display: none !important
+
+.ofhidden
+  overflow: hidden

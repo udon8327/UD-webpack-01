@@ -1,5 +1,3 @@
-import '../sass/main.scss';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.bundle.js';
+console.log('init');
 
-import './custom';
+import "js/ud-axios.js"
