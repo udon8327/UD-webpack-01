@@ -1,11 +1,10 @@
 //- - var env = "dev";
-
 doctype html
 html(lang='zh-Hant-TW')
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible' content='IE=edge')
-    meta(name="viewport" content="width=device-width initial-scale=1 shrink-to-fit=no maximum-scale=1 user-scalable=no")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no")
     meta(name="format-detection" content="telephone=no")
     //- meta(name='description' content='描述')
     //- meta(name='keywords' content='關鍵字')
@@ -23,14 +22,14 @@ html(lang='zh-Hant-TW')
 
   body
     noscript Your browser does not support JavaScript!
-    #app(v-cloak)
+    #app
       .container
         //- block modal
         block content
 
     //- script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
-    //- script(src=`https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.${env==="dev"?"common.dev":"min"}.js`)
-    //- script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js')
+    script(src=`https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.common.dev.js`)
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js')
     //- script(src='https://static.line-scdn.net/liff/edge/versions/2.6.0/sdk.js')
     //- script(src="js/ud-axios.js")
     //- script(src="js/ud-modules.js")

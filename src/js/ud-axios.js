@@ -1,3 +1,4 @@
+let MSG_CHANNEL_ID = 12345678;
 /**
  * udAxios 額外config值
  * @param {Boolean} noAlert 關閉alert效果

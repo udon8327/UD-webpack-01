@@ -1,5 +1,3 @@
-declare var $: (selector: string) => any;
-
 /*
 ==================== TODO ====================
 寫說明文件

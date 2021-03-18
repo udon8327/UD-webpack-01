@@ -4,11 +4,13 @@ const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 var config = {
   context: path.resolve(__dirname, 'src'),
   entry: {
-    index: './js/index.js'
+    index: './js/index.js',
+    page: './js/page.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -53,7 +55,12 @@ var config = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader', // Creates `style` nodes from JS strings
+          {
+            loader: MiniCssExtractPlugin.loader,
+            // options: {
+            //   publicPath: '../css', // 指定公共路徑
+            // },
+          }, // Creates `style` nodes from JS strings
           'css-loader', // Translates CSS into CommonJS
           'sass-loader' // Compiles Sass to CSS
         ]
@@ -61,7 +68,12 @@ var config = {
       {
         test: /\.css$/i,
         use: [
-          'style-loader', // Creates `style` nodes from JS strings
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../', // 指定公共路徑
+            },
+          }, // Creates `style` nodes from JS strings
           'css-loader' // Translates CSS into CommonJS
         ]
       },
@@ -84,6 +96,12 @@ var config = {
               name: '[path][name].[ext]?[hash:8]'
             }
           },
+          // {
+          //   loader: 'file-loader',
+          //   options: {
+          //     name: './images/[name].[ext]?[hash:8]', // 修改生成路徑
+          //   },
+          // },
           {
             loader: 'image-webpack-loader',
             options: {
@@ -109,16 +127,19 @@ var config = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new CopyPlugin({
-      patterns: [
-        { from: 'css', to: 'css' },
-        { from: 'images', to: 'images' },
-        { from: 'assets', to: 'assets' }
-      ]
-    }),
+    // new CopyPlugin({
+    //   patterns: [
+    //     { from: 'css', to: 'css' },
+    //     { from: 'images', to: 'images' },
+    //     { from: 'assets', to: 'assets' }
+    //   ]
+    // }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery' //這邊以上是新增
+    }),
+    new MiniCssExtractPlugin({
+      filename: './css/[name].[hash:8].css',
     })
     // new HtmlWebpackPlugin({
     //   template: './pug/index.pug',
@@ -145,7 +166,7 @@ glob.sync('./src/pug/*.pug').forEach((path) => {
       template: './pug/' + name + '.pug',
       filename: name + '.html',
       inject: true,
-      chunks: ['index'],
+      chunks: [name],
       minify: {
         sortAttributes: true,
         collapseWhitespace: false,
