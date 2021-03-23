@@ -42,6 +42,18 @@ var config = {
   module: {
     rules: [
       {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+            options: {
+              minimize: false // 不壓縮 HTML
+            }
+          },
+        ],
+        include: path.resolve(__dirname, 'src')
+      },
+      {
         test: /\.pug$/,
         use: [
           {
@@ -60,7 +72,28 @@ var config = {
         include: path.resolve(__dirname, 'src')
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              injectType: 'singletonStyleTag', // 多個CSS合併為單一個style標籤
+              publicPath: '../', // 指定公共路徑
+              // hmr: true, // 開啟 HMR 支持
+            },
+          },
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [require('autoprefixer')],
+            },
+          },
+        ],
+        include: path.resolve(__dirname, 'src')
+      },
+      {
+        test: /\.s[ac]ss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -78,27 +111,6 @@ var config = {
             },
           },
           'sass-loader'
-        ],
-        include: path.resolve(__dirname, 'src')
-      },
-      {
-        test: /\.css$/i,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              injectType: 'singletonStyleTag', // 多個CSS合併為單一個style標籤
-              publicPath: '../', // 指定公共路徑
-              // hmr: true, // 開啟 HMR 支持
-            },
-          },
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: [require('autoprefixer')],
-            },
-          },
         ],
         include: path.resolve(__dirname, 'src')
       },
@@ -144,7 +156,19 @@ var config = {
           }
         ],
         include: path.resolve(__dirname, 'src')
-      }
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf|)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'font/[name].[ext]',
+            },
+          },
+        ],
+        include: path.resolve(__dirname, 'src')
+      },
     ]
   },
   plugins: [
