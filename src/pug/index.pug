@@ -7,12 +7,13 @@ extends ./layout/_layout.pug
 //- block modal
 
 block content
-  h1 {{ title }}
+  h1 {{ title }}123
   ud-button(@click="toUrl('page.html')") TO PAGE
-  img(src="../images/no_pirce.png" style="max-width: 60px;", alt="")
-  img(src="../images/title.jpg", alt="")
-  img(src="../images/start.jpg", alt="")
-  img(src="../images/description.jpg", alt="")
+  img(src="~@/img/no_pirce.png" style="max-width: 60px;", alt="")
+  .test
+  img(src="~@/img/title.jpg", alt="")
+  img(src="~@/img/start.jpg", alt="")
+  img(src="~@/img/description.jpg", alt="")
 
 //- block js
   //- script(src='plugins/scratchcard/scratchcard.min.js')

@@ -3034,3 +3034,5 @@ function animate({timing, draw, duration}) {
 
   });
 }
+
+export { getRandom, nl2br }
