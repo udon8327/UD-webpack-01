@@ -7,6 +7,7 @@
  * @param {Object} loading 客製化loading效果
  */
 
+import axios from 'Axios'
 import { udLoading, udAlert } from '@/utils/ud-components.js'
 
 // 自定義axios實例預設值
@@ -33,7 +34,7 @@ udAxios.interceptors.request.use(
     return config;
   },
   error => {
-    udAlert ? udAlert({title: error.message, msg: "請求發送失敗，請稍候再試"}) : alert("請求發送失敗，請稍候再試");
+    udAlert({title: error.message, msg: "請求發送失敗，請稍候再試"});
   }
 )
 
@@ -96,18 +97,13 @@ udAxios.interceptors.response.use(
         reject(error);
         return;
       }
-      if(udAlert) {
-        let alertConfig = {
-          title: error.message,
-          msg: errorMsg,
-          confirm: () => reject(error)
-        }
-        Object.assign(alertConfig, error.config.alert);
-        udAlert(alertConfig);
-      }else {
-        alert(errorMsg);
-        reject(error);
+      let alertConfig = {
+        title: error.message,
+        msg: errorMsg,
+        confirm: () => reject(error)
       }
+      Object.assign(alertConfig, error.config.alert);
+      udAlert(alertConfig);
     })
 
   }

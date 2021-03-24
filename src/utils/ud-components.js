@@ -52,6 +52,7 @@ Tools
 */
 
 import { nl2br } from '@/utils/ud-tools.js'
+import Vue from 'vue'
 
 //-----------------------Form-----------------------
 // Button 按鈕

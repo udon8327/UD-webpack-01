@@ -179,7 +179,7 @@ let config = {
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
-      // 'vue$': 'vue/dist/vue.esm.js'
+      vue: 'vue/dist/vue.esm.js'
     },
     modules: [path.resolve(__dirname, 'node_modules')],
   },

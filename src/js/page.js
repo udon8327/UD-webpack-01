@@ -9,6 +9,7 @@ import '@/sass/main.sass'
 import '@/sass/page.sass'
 import '@/utils/ud-components.sass'
 
+import Vue from 'vue'
 import { udAxios } from '@/utils/ud-axios.js'
 import { udLoading, udAlert } from '@/utils/ud-components.js'
 import { getRandom } from '@/utils/ud-tools.js'
