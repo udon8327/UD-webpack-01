@@ -9,7 +9,8 @@ extends ./layout/_layout.pug
 block content
   h2 Rice Shower
   h1 {{ title }}123
-  //- ud-button(@click="toUrl('page.html')") TO PAGE
+  ud-input(v-model="name")
+  ud-button(@click="toUrl('page.html')") TO PAGE
   img(src="~@/img/no_pirce.png" style="max-width: 60px;", alt="")
   .test
   img(src="~@/img/title.jpg", alt="")

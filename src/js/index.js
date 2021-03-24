@@ -6,27 +6,31 @@
 console.log('index頁');
 
 import '@/sass/main.sass'
-import '@/sass/ud-modules.sass'
 import '@/sass/index.sass'
-import '@/js/ud-modules.js'
-import '@/js/ud-axios.js'
+import '@/utils/ud-components.sass'
 
-import { getRandom, nl2br } from './ud-modules.js'
+import { udAxios } from '@/utils/ud-axios.js'
+import { udLoading, udAlert } from '@/utils/ud-components.js'
+import { getRandom } from '@/utils/ud-tools.js'
 
-let vm = new Vue({
+new Vue({
   el: '#app',
   data: {
-    title: "INDEX"
+    title: "Index",
+    name: "UDON"
   },
   mounted(){
-    console.log(getRandom());
+    // udLoading.open();
+    // setTimeout(() => {
+    //   udLoading.close();
+    // }, 2000);
+    // console.log(getRandom());
+    udAxios.get('https://udon8327.synology.me/ajax/success.php')
+      .then(res => console.log(res))
   },
   methods: {
     toUrl(url) {
       location.href = url;
-    },
-    nl2br: function(val){
-      return nl2br(val)
     },
   },
 });

@@ -165,8 +165,6 @@ let config = {
     new CleanWebpackPlugin(),
     new CopyPlugin({
       patterns: [
-        // { from: 'css', to: 'css' },
-        // { from: 'img', to: 'img' },
         { from: 'assets', to: 'assets' }
       ]
     }),
@@ -181,6 +179,7 @@ let config = {
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      // 'vue$': 'vue/dist/vue.esm.js'
     },
     modules: [path.resolve(__dirname, 'node_modules')],
   },

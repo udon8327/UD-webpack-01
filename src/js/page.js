@@ -5,16 +5,18 @@
 
 console.log('page頁');
 
-import '../sass/main.sass'
-import '../sass/ud-modules.sass'
-import '../sass/index.sass'
-import './ud-modules.js'
-import './ud-axios.js'
+import '@/sass/main.sass'
+import '@/sass/page.sass'
+import '@/utils/ud-components.sass'
+
+import { udAxios } from '@/utils/ud-axios.js'
+import { udLoading, udAlert } from '@/utils/ud-components.js'
+import { getRandom } from '@/utils/ud-tools.js'
 
 let vm = new Vue({
   el: '#app',
   data: {
-    title: "INDEX"
+    title: "page"
   },
   mounted(){
   },

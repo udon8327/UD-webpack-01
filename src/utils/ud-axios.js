@@ -7,6 +7,8 @@
  * @param {Object} loading 客製化loading效果
  */
 
+import { udLoading, udAlert } from '@/utils/ud-components.js'
+
 // 自定義axios實例預設值
 const udAxios = axios.create({
   baseURL: "https://udon8327.synology.me/ajax",
@@ -23,15 +25,15 @@ let ajaxCount = 0;
 // 請求攔截器
 udAxios.interceptors.request.use(
   config => {
-    if(vm.udLoading && !config.noLoading){
-      if(ajaxCount === 0) vm.udLoading.open(config.loading);
+    if(udLoading && !config.noLoading){
+      if(ajaxCount === 0) udLoading.open(config.loading);
       ajaxCount++;
     }
     // config.data = JSON.stringify(config.data);
     return config;
   },
   error => {
-    vm.udAlert ? vm.udAlert({title: error.message, msg: "請求發送失敗，請稍候再試"}) : alert("請求發送失敗，請稍候再試");
+    udAlert ? udAlert({title: error.message, msg: "請求發送失敗，請稍候再試"}) : alert("請求發送失敗，請稍候再試");
   }
 )
 
@@ -39,17 +41,17 @@ udAxios.interceptors.request.use(
 udAxios.interceptors.response.use(
   // 狀態碼 2xx: 回應成功
   response => {
-    if(vm.udLoading && !response.config.noLoading){
+    if(udLoading && !response.config.noLoading){
       ajaxCount--;
-      if(ajaxCount === 0) vm.udLoading.close();
+      if(ajaxCount === 0) udLoading.close();
     }
     return Promise.resolve(response.config.fullRes ? response : response.data);
   },
   // 狀態碼 3xx: 重新導向, 4xx: 用戶端錯誤, 5xx: 伺服器錯誤
   error => {
-    if(vm.udLoading && !error.config.noLoading) {
+    if(udLoading && !error.config.noLoading) {
       ajaxCount--;
-      if(ajaxCount === 0) vm.udLoading.close();
+      if(ajaxCount === 0) udLoading.close();
     }
 
     let errorMsg = "";
@@ -94,14 +96,14 @@ udAxios.interceptors.response.use(
         reject(error);
         return;
       }
-      if(vm.udAlert) {
+      if(udAlert) {
         let alertConfig = {
           title: error.message,
           msg: errorMsg,
           confirm: () => reject(error)
         }
         Object.assign(alertConfig, error.config.alert);
-        vm.udAlert(alertConfig);
+        udAlert(alertConfig);
       }else {
         alert(errorMsg);
         reject(error);
@@ -110,3 +112,5 @@ udAxios.interceptors.response.use(
 
   }
 );
+
+export { udAxios }
