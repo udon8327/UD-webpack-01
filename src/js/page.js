@@ -1,4 +1,9 @@
-console.log('page');
+// 開啟 HMR 支持 (全部模組)
+// if (module.hot) {
+//   module.hot.accept();
+// }
+
+console.log('page頁');
 
 import '../sass/main.sass'
 import '../sass/ud-modules.sass'
@@ -17,8 +22,8 @@ let vm = new Vue({
     toUrl(url) {
       location.href = url;
     },
-    nl2br: function(val){
-      return nl2br(val)
-    },
+    // nl2br: function(val){
+    //   return nl2br(val)
+    // },
   },
 });

@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-var config = {
+let config = {
   context: path.resolve(__dirname, 'src'),
   entry: {
     index: './js/index.js',
@@ -14,30 +14,19 @@ var config = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'js/[name].bundle.js?[hash:8]',
+    filename: 'js/[name].[chunkhash:8].js',
     // publicPath: ''
   },
   devServer: {
     compress: true, // 是否啟用 gzip 壓縮 預設為false
-    port: 3000, // port端口 預設為8080 若被佔用則使用8081
+    // port: 3000, // port端口 預設為8080 若被佔用則使用8081
     host: '0.0.0.0', // 預設值為'127.0.0.1'本機 想讓區網中其他裝置存取需設為'0.0.0.0'
     useLocalIp: true, // 使用本機ip而非localhost
     open: false, // 啟動時是否自動開啟頁面
     https: true, // 是否開啟https
     // hot: true,
-    // stats: { // 精準控制要顯示的 bundle 訊息
-    //   assets: true,
-    //   cached: false,
-    //   chunkModules: false,
-    //   chunkOrigins: false,
-    //   chunks: false,
-    //   colors: true,
-    //   hash: false,
-    //   modules: false,
-    //   reasons: false,
-    //   versions: false,
-    //   warnings: false
-    // }
+    // contentBase: './src/index.html',
+    // watchContentBase: true,
   },
   module: {
     rules: [
@@ -131,7 +120,7 @@ var config = {
             loader: 'url-loader',
             options: {
               limit: 8192,
-              name: 'img/[name].[ext]?[hash:8]'
+              name: 'img/[name].[hash:8].[ext]'
             }
           },
           {
@@ -172,6 +161,7 @@ var config = {
     ]
   },
   plugins: [
+    // new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(),
     new CopyPlugin({
       patterns: [
@@ -182,24 +172,11 @@ var config = {
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',
-      jQuery: 'jquery' //這邊以上是新增
+      jQuery: 'jquery'
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash:8].css',
+      filename: 'css/[name].[chunkhash:8].css',
     }),
-    // new HtmlWebpackPlugin({
-    //   template: './pug/index.pug',
-    //   filename: 'index.html',
-    //   inject: true,
-    //   chunks: ['index'],
-    //   minify: {
-    //     sortAttributes: true,
-    //     collapseWhitespace: false, // 折疊空白字元就是壓縮Html
-    //     collapseBooleanAttributes: true, // 折疊布林值属性，例:readonly checked
-    //     removeComments: true, // 移除註釋
-    //     removeAttributeQuotes: true // 移除屬性的引號
-    //   }
-    // }),
   ],
   resolve: {
     alias: {
@@ -210,13 +187,14 @@ var config = {
   watchOptions: {
     ignored: /node_modules/,
   },
-  // devtool: 'source-map', // 輸出source-map以方便直接偵錯ES6原始程式
+  devtool: process.env.NODE_ENV === 'development' ? 'cheap-module-eval-source-map' : 'false', // 輸出source-map以方便直接偵錯ES6原始程式
   externals: { // 排除已使用javascript全域變數的模組
     jquery: 'jQuery'
   },
 };
 
-glob.sync('./src/pug/*.pug').forEach((path) => {
+// pug編譯自動化
+glob.sync('./src/pug/*.pug').forEach(path => {
   const start = path.indexOf('/pug/') + 5;
   const end = path.length - 4;
   const name = path.slice(start, end);
@@ -226,6 +204,8 @@ glob.sync('./src/pug/*.pug').forEach((path) => {
       filename: name + '.html',
       inject: true,
       chunks: [name],
+      // chunksSortMode: 'manual', // 將排序改為手動模式 (即根據 chunks 進行排序)
+      // minify: process.env.NODE_ENV === 'development' ? false : true,
       minify: {
         sortAttributes: true,
         collapseWhitespace: false, // 折疊空白字元就是壓縮Html

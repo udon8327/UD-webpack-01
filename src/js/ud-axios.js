@@ -1,4 +1,3 @@
-let MSG_CHANNEL_ID = 12345678;
 /**
  * udAxios 額外config值
  * @param {Boolean} noAlert 關閉alert效果
@@ -10,11 +9,9 @@ let MSG_CHANNEL_ID = 12345678;
 
 // 自定義axios實例預設值
 const udAxios = axios.create({
-  baseURL: "",
+  baseURL: "https://udon8327.synology.me/ajax",
   timeout: 10000, // 請求超時時間
-  headers: {
-    Channel: MSG_CHANNEL_ID
-  },
+  // headers: {},
   // auth: {}, // 設置Authorization頭
   // withCredentials: true, // 允許攜帶cookie
   // responseType: "json", // 指定回傳格式
@@ -77,11 +74,11 @@ udAxios.interceptors.response.use(
         case 503:
           errorMsg = "服務失效，請稍候再試";
           break;
-        default:
-          errorMsg = "發生錯誤，請稍候再試";
-      }
-      // 自定義錯誤訊息
-      if(error.response.data) errorMsg = error.response.data.message || "發生錯誤，請稍候再試";
+          default:
+            errorMsg = "發生錯誤，請稍候再試";
+        }
+        // 自定義錯誤訊息
+        if(error.response.data) errorMsg = error.response.data.message || "發生錯誤，請稍候再試";
 
     // 請求已發出，但没有收到回應
     }else if(error.request) {
