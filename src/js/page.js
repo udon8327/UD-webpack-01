@@ -3,8 +3,6 @@
 //   module.hot.accept();
 // }
 
-console.log('page頁');
-
 import '@/sass/main.sass'
 import '@/sass/page.sass'
 import '@/utils/ud-components.sass'

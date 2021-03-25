@@ -3,18 +3,15 @@
 //   module.hot.accept();
 // }
 
-console.log('index頁');
-
 import '@/sass/main.sass'
 import '@/sass/index.sass'
 import '@/utils/ud-components.sass'
 
 import Vue from 'vue'
 import { udAxios } from '@/utils/ud-axios.js'
-// import { udLoading, udAlert } from '@/utils/ud-components.js'
 import '@/utils/ud-components.js'
 import { getRandom } from '@/utils/ud-tools.js'
-import { udLoading } from '../utils/ud-components';
+import { udLoading, udAlert } from '../utils/ud-components';
 
 window.vm = new Vue({
   el: '#app',
@@ -23,7 +20,7 @@ window.vm = new Vue({
     name: "UDON"
   },
   mounted(){
-    udLoading123.open()
+    console.log('process.env.NODE_ENV', process.env.NODE_ENV);
     console.log(getRandom());
     udAxios.get('https://udon8327.synology.me/ajax/success.php')
       .then(res => console.log(res))

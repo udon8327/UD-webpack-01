@@ -1,19 +1,13 @@
 {
-  "name": "pug-sass-boilerplate",
+  "name": "ud-webpack",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run dev",
     "dev": "webpack-dev-server --mode development --config webpack.config.js",
     "build": "webpack --mode production --config webpack.config.js"
   },
-  "keywords": [
-    "pug",
-    "sass",
-    "webpack"
-  ],
-  "author": "Soar Lin <soar.lin@gmail.com>",
+  "author": "UDON",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.10.5",
@@ -35,7 +29,7 @@
     "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.0",
-    "webpack": "^4.43.0",
+    "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
