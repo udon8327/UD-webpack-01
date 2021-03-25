@@ -11,8 +11,10 @@ import '@/utils/ud-components.sass'
 
 import Vue from 'vue'
 import { udAxios } from '@/utils/ud-axios.js'
-import { udLoading, udAlert } from '@/utils/ud-components.js'
+// import { udLoading, udAlert } from '@/utils/ud-components.js'
+import '@/utils/ud-components.js'
 import { getRandom } from '@/utils/ud-tools.js'
+import { udLoading } from '../utils/ud-components';
 
 window.vm = new Vue({
   el: '#app',
@@ -21,6 +23,7 @@ window.vm = new Vue({
     name: "UDON"
   },
   mounted(){
+    udLoading123.open()
     console.log(getRandom());
     udAxios.get('https://udon8327.synology.me/ajax/success.php')
       .then(res => console.log(res))

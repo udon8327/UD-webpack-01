@@ -179,14 +179,15 @@ let config = {
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
-      vue: 'vue/dist/vue.esm.js'
+      vue: 'vue/dist/vue.esm.js' // 更改Vue編譯版本
     },
     modules: [path.resolve(__dirname, 'node_modules')],
   },
+  stats: 'errors-only',
   watchOptions: {
     ignored: /node_modules/,
   },
-  devtool: process.env.NODE_ENV === 'development' ? 'cheap-module-eval-source-map' : 'false', // 輸出source-map以方便直接偵錯ES6原始程式
+  devtool: env.production ? 'cheap-module-eval-source-map' : '', // 輸出source-map以方便直接偵錯ES6原始程式
   externals: { // 排除已使用javascript全域變數的模組
     jquery: 'jQuery'
   },
@@ -214,4 +215,6 @@ glob.sync('./src/pug/*.pug').forEach(path => {
   );
 });
 
-module.exports = config;
+module.exports = (env) => {
+  config
+};

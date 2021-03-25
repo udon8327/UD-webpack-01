@@ -1566,6 +1566,7 @@ let udLoading = { // 加至vue原型方法
     UdLoading.destroy();
   }
 };
+Vue.prototype.udLoading = udLoading;
 export { udLoading }
 
 
