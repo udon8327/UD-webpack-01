@@ -3,23 +3,22 @@
 //   module.hot.accept();
 // }
 
-import '@/sass/main.sass'
 import '@/sass/index.sass'
-import '@/utils/ud-components.sass'
 
 import Vue from 'vue'
 import { udAxios } from '@/utils/ud-axios.js'
-import '@/utils/ud-components.js'
+// import '@/utils/ud-components.js'
 import { getRandom } from '@/utils/ud-tools.js'
-import { udLoading, udAlert } from '../utils/ud-components';
+import { udAlert, udLoading } from '../utils/ud-components'
 
-window.vm = new Vue({
+new Vue({
   el: '#app',
   data: {
-    title: "Index",
-    name: "UDON"
+    title: "INDEX",
+    name: "Rice Shower"
   },
   mounted(){
+    // udLoading.open();
     console.log('process.env.NODE_ENV', process.env.NODE_ENV);
     console.log(getRandom());
     udAxios.get('https://udon8327.synology.me/ajax/success.php')

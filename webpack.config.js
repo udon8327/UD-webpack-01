@@ -19,7 +19,7 @@ module.exports = (env, options) => {
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'js/[name].[chunkhash:8].js',
+      filename: 'js/[name].[hash:8].js',
       // publicPath: ''
     },
     devServer: {
@@ -66,6 +66,10 @@ module.exports = (env, options) => {
           include: path.resolve(__dirname, 'src')
         },
         {
+          test: /\.vue$/,
+          loader: 'vue-loader'
+        },
+        {
           test: /\.css$/,
           use: [
             {
@@ -76,6 +80,7 @@ module.exports = (env, options) => {
                 // hmr: true, // 開啟 HMR 支持
               },
             },
+            'vue-style-loader',
             'css-loader',
             {
               loader: 'postcss-loader',
@@ -89,6 +94,7 @@ module.exports = (env, options) => {
         {
           test: /\.s[ac]ss$/,
           use: [
+            // isDev ? 'style-loader' : {
             {
               loader: MiniCssExtractPlugin.loader,
               options: {
@@ -168,23 +174,24 @@ module.exports = (env, options) => {
     plugins: [
       // new webpack.HotModuleReplacementPlugin(),
       new CleanWebpackPlugin(),
-      new CopyPlugin({
-        patterns: [
-          { from: 'assets', to: 'assets' }
-        ]
-      }),
+      // new CopyPlugin({
+      //   patterns: [
+      //     { from: 'public', to: 'public' }
+      //   ]
+      // }),
       // new webpack.ProvidePlugin({
       //   $: 'jquery',
       //   jQuery: 'jquery'
       // }),
       new MiniCssExtractPlugin({
-        filename: 'css/[name].[chunkhash:8].css',
+        filename: 'css/[name].[hash:8].css',
       }),
       // new HtmlWebpackPlugin({
-      //   template: 'test.html',
-      //   filename: 'test.html',
-      //   inject: false,
-      //   chunks: ['test'],
+      //   template: 'public/index.html',
+      //   filename: 'index.html',
+      //   inject: true,
+      //   chunks: 'main.js',
+      //   favicon: 'public/favicon.ico',
       //   // chunksSortMode: 'manual', // 將排序改為手動模式 (即根據 chunks 進行排序)
       //   minify: {
       //     sortAttributes: true,
@@ -194,9 +201,10 @@ module.exports = (env, options) => {
       // })
     ],
     resolve: {
+      extensions: ['.vue', '.mjs', '.js', '.json'],
       alias: {
         '@': path.resolve(__dirname, 'src'),
-        vue: 'vue/dist/vue.esm.js' // 更改Vue編譯版本
+        'vue': 'vue/dist/vue.esm.js' // 更改Vue編譯版本
       },
       modules: [path.resolve(__dirname, 'node_modules')],
     },
@@ -219,6 +227,7 @@ module.exports = (env, options) => {
       new HtmlWebpackPlugin({
         template: './pug/' + name + '.pug',
         filename: name + '.html',
+        favicon: 'public/favicon.ico',
         inject: true,
         chunks: [name],
         // chunksSortMode: 'manual', // 將排序改為手動模式 (即根據 chunks 進行排序)
@@ -231,6 +240,6 @@ module.exports = (env, options) => {
     );
   });
 
-  console.log('config', config);
+  // console.log('config', config); // 輸出最終配置
   return config;
 };

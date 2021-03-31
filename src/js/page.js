@@ -3,9 +3,7 @@
 //   module.hot.accept();
 // }
 
-import '@/sass/main.sass'
 import '@/sass/page.sass'
-import '@/utils/ud-components.sass'
 
 import Vue from 'vue'
 import { udAxios } from '@/utils/ud-axios.js'
@@ -15,7 +13,7 @@ import { getRandom } from '@/utils/ud-tools.js'
 let vm = new Vue({
   el: '#app',
   data: {
-    title: "page"
+    title: "PAGE"
   },
   mounted(){
   },
